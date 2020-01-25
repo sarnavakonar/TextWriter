@@ -34,6 +34,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -215,10 +216,10 @@ public class TextWriter extends View {
         else
             HORIZONTAL_BOUND = 3*VERTICAL_BOUND/4;
 
-        int totalLetterWidth = 0;
+        float totalLetterWidth = 0;
         for(int i=0; i< text.length(); i++){
 
-            if(!Character.isUpperCase(text.charAt(i))){
+            if(!Character.isUpperCase(text.charAt(i)) && !Character.isSpaceChar(text.charAt(i))){
 
                 throw new RuntimeException("Text does not follow rules");
             }
@@ -226,19 +227,23 @@ public class TextWriter extends View {
             //adds the width required to draw the particular letter
             if(text.charAt(i) == 'I')
                 totalLetterWidth += 0;
-            else if(text.charAt(i) == 'J' || text.charAt(i) == 'U')
+            else if(text.charAt(i) == ' ')
+                totalLetterWidth += HORIZONTAL_BOUND;
+            else if(text.charAt(i) == 'J' || text.charAt(i) == 'U' || text.charAt(i) == 'L')
                 totalLetterWidth += 3*HORIZONTAL_BOUND/2;
             else
                 totalLetterWidth += 2*HORIZONTAL_BOUND;
         }
 
-        int letters = text.length();
+        //get only the letters excluding whitespaces
+        int letters = text.replaceAll(" ", "").length();
 
         //calculates the total width required to draw the letters including gaps b/w letters
         float totalWidth = totalLetterWidth + GAP*(letters - 1);
 
         //the starting x-coordinate
         float startX = (screenWidth - totalWidth)/2;
+        float endX = (screenWidth + totalWidth)/2;
 
         //the y-coordinate of the center of the canvas for drawing a letter
         centreY = screenHeight/2;
@@ -250,10 +255,14 @@ public class TextWriter extends View {
         //the x-coordinate of the center of the canvas for drawing a letter
         if(currentCharacter == 'I')
             centreX = startX;
-        else if(currentCharacter == 'J' || currentCharacter == 'U')
+        else if(currentCharacter == ' ')
+            centreX = startX + HORIZONTAL_BOUND/2;
+        else if(currentCharacter == 'J' || currentCharacter == 'U' || currentCharacter == 'L')
             centreX = startX + 3*HORIZONTAL_BOUND/4;
         else
             centreX = startX + HORIZONTAL_BOUND;
+
+        Log.e("boom", startX+"  -  "+endX+"  -  "+screenWidth);
 
         //start the drawing
         startDrawing();
@@ -287,6 +296,8 @@ public class TextWriter extends View {
     private void startDrawingC(){
 
         sweepAngle = 0;
+
+        step = 1;
 
         invalidate();
     }
@@ -388,7 +399,7 @@ public class TextWriter extends View {
 
     private void startDrawingL(){
 
-        x = centreX - HORIZONTAL_BOUND;
+        x = centreX - 3*HORIZONTAL_BOUND/4;
         y = centreY - VERTICAL_BOUND;
 
         path.moveTo(x, y);
@@ -425,6 +436,8 @@ public class TextWriter extends View {
     private void startDrawingO(){
 
         sweepAngle = 0;
+
+        step = 1;
 
         invalidate();
     }
@@ -558,6 +571,11 @@ public class TextWriter extends View {
         invalidate();
     }
 
+    private void startDrawingSpace(){
+
+        adjust();
+    }
+
     private void drawA(){
 
         if(step == 1){
@@ -676,21 +694,26 @@ public class TextWriter extends View {
 
     private void drawC(){
 
-        if(sweepAngle < -270){
+        if(step == 1){
 
-            adjust();
-            return;
+            if(sweepAngle < -270){
+
+                step++;
+                adjust();
+            }
+            else {
+
+                RectF rect = new RectF();
+                rect.set(centreX - HORIZONTAL_BOUND,
+                        centreY - VERTICAL_BOUND,
+                        centreX + HORIZONTAL_BOUND,
+                        centreY + VERTICAL_BOUND);
+
+                path.addArc (rect, -45, sweepAngle);
+
+                sweepAngle-=45;
+            }
         }
-
-        RectF rect = new RectF();
-        rect.set(centreX - HORIZONTAL_BOUND,
-                centreY - VERTICAL_BOUND,
-                centreX + HORIZONTAL_BOUND,
-                centreY + VERTICAL_BOUND);
-
-        path.addArc (rect, -45, sweepAngle);
-
-        sweepAngle-=45;
     }
 
     private void drawD(){
@@ -945,16 +968,19 @@ public class TextWriter extends View {
 
     private void drawI(){
 
-        if(y > centreY + VERTICAL_BOUND){
+        if(step == 1){
 
-            step++;
-            adjust();
-        }
-        else {
+            if(y > centreY + VERTICAL_BOUND){
 
-            path.lineTo(x, y);
+                step++;
+                adjust();
+            }
+            else {
 
-            y+=VERTICAL_BOUND/2;
+                path.lineTo(x, y);
+
+                y+=VERTICAL_BOUND/2;
+            }
         }
     }
 
@@ -1070,7 +1096,7 @@ public class TextWriter extends View {
         }
         else if(step == 2){
 
-            if(x > centreX + HORIZONTAL_BOUND){
+            if(x > centreX + 3*HORIZONTAL_BOUND/4){
 
                 step++;
                 adjust();
@@ -1206,21 +1232,26 @@ public class TextWriter extends View {
 
     private void drawO(){
 
-        if(sweepAngle < -360){
+        if(step == 1){
 
-            adjust();
-            return;
+            if(sweepAngle < -360){
+
+                step++;
+                adjust();
+            }
+            else {
+
+                RectF rect = new RectF();
+                rect.set(centreX - HORIZONTAL_BOUND,
+                        centreY - VERTICAL_BOUND,
+                        centreX + HORIZONTAL_BOUND,
+                        centreY + VERTICAL_BOUND);
+
+                path.addArc (rect, 0, sweepAngle);
+
+                sweepAngle-=45;
+            }
         }
-
-        RectF rect = new RectF();
-        rect.set(centreX - HORIZONTAL_BOUND,
-                centreY - VERTICAL_BOUND,
-                centreX + HORIZONTAL_BOUND,
-                centreY + VERTICAL_BOUND);
-
-        path.addArc (rect, 0, sweepAngle);
-
-        sweepAngle-=45;
     }
 
     private void drawP(){
@@ -1267,7 +1298,7 @@ public class TextWriter extends View {
 
     private void drawQ(){
 
-        if (step == 1){
+        if(step == 1){
 
             if(sweepAngle < -360){
 
@@ -1748,6 +1779,7 @@ public class TextWriter extends View {
             case 'X': startDrawingX();break;
             case 'Y': startDrawingY();break;
             case 'Z': startDrawingZ();break;
+            case ' ': startDrawingSpace();break;
         }
     }
 
@@ -1789,7 +1821,9 @@ public class TextWriter extends View {
         //shifts the centreX to the end of the canvas after drawing the current letter
         if(currentCharacter == 'I')
             centreX = centreX + 0;
-        else if(currentCharacter == 'J' || currentCharacter == 'U')
+        else if(currentCharacter == ' ')
+            centreX = centreX + HORIZONTAL_BOUND/2;
+        else if(currentCharacter == 'J' || currentCharacter == 'U' || currentCharacter == 'L')
             centreX = centreX + 3*HORIZONTAL_BOUND/4;
         else
             centreX = centreX + HORIZONTAL_BOUND;
@@ -1804,6 +1838,8 @@ public class TextWriter extends View {
         }
         else {
 
+            Log.e("boom", centreX+"");
+
             //stop drawing
             if(listener != null)
                 listener.WritingFinished();
@@ -1815,7 +1851,9 @@ public class TextWriter extends View {
         //sets the centreX as the centre of the canvas for the next letter
         if(currentCharacter == 'I')
             centreX = centreX + GAP;
-        else if(currentCharacter == 'J' || currentCharacter == 'U')
+        else if(currentCharacter == ' ')
+            centreX = centreX + HORIZONTAL_BOUND/2;
+        else if(currentCharacter == 'J' || currentCharacter == 'U' || currentCharacter == 'L')
             centreX = centreX + GAP + 3*HORIZONTAL_BOUND/4;
         else
             centreX = centreX + GAP + HORIZONTAL_BOUND;
