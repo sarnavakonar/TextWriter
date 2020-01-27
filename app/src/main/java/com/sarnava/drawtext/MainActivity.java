@@ -20,27 +20,23 @@ public class MainActivity extends AppCompatActivity {
 
         textWriter = findViewById(R.id.tw);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        textWriter.setColor(Color.BLACK)
+                .setWidth(12)
+                .setDelay(40)
+                .setSizeFactor(50f)
+                .setLetterSpacing(30f)
+                .setConfig(TextWriter.Configuration.INTERMEDIATE)
+                .setText("DUN KIRK")
+                .setListener(new TextWriter.Listener() {
+                    @Override
+                    public void WritingFinished() {
 
-                textWriter.setColor(Color.BLACK)
-                        .setWidth(12)
-                        .setDelay(30)
-                        .setSizeFactor(40f)
-                        .setLetterSpacing(30f)
-                        .setConfig(TextWriter.Configuration.INTERMEDIATE)
-                        .setText("IRON MAN")
-                        .setListener(new TextWriter.Listener() {
-                            @Override
-                            public void WritingFinished() {
-
-                                //Toast.makeText(MainActivity.this, "boom", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .startAnimation();
-            }
-        }, 200);
+                        textWriter.setColor(Color.RED);
+                        textWriter.setWidth(18);
+                        //Toast.makeText(MainActivity.this, "boom", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .startAnimation();
     }
 
 }
