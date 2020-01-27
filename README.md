@@ -39,7 +39,7 @@ textWriter
          .setDelay(30)
          .setColor(Color.RED)
          .setConfig(TextWriter.Configuration.INTERMEDIATE)
-         .setSizeFactor(50f)
+         .setSizeFactor(30f)
          .setLetterSpacing(25f)
          .setText("LIVERPOOL FC")
          .setListener(new TextWriter.Listener() {
