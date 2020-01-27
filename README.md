@@ -5,7 +5,7 @@
 
 Add this in your root build.gradle at the end of repositories:
 
-```bash
+```
 allprojects {
 	repositories {
 		...
@@ -15,7 +15,7 @@ allprojects {
 ```
 Add this in your app level gradle:
 
-```bash
+```
 implementation 'com.github.sarnavakonar:TextWriter:v1.0'
 ```
 
@@ -23,7 +23,7 @@ implementation 'com.github.sarnavakonar:TextWriter:v1.0'
 
 Add TextWriter in your xml file:
 
-```bash
+```
 <com.sarnava.textwriter.TextWriter
         android:id="@+id/textWriter"
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@ Add TextWriter in your xml file:
 
 Initialize in the Activity file:
 
-```bash
+```
 TextWriter textWriter;
 
 textWriter = findViewById(R.id.textWriter);
@@ -42,7 +42,7 @@ textWriter = findViewById(R.id.textWriter);
 
 Customize according to your need (**as of now it only support uppercase letters and whitespace** :broken_heart:):
 
-```bash
+```
 textWriter
          .setWidth(12)
          .setDelay(30)
@@ -89,5 +89,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-[MIT](https://choosealicense.com/licenses/mit/)
