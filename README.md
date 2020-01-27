@@ -26,7 +26,7 @@ Initialize the TextWriter:
 ```bash
 TextWriter textWriter;
 
-textWriter = findViewById(R.id.tw);
+textWriter = findViewById(R.id.textWriter);
 ```
 
 ## Customization
