@@ -1,5 +1,5 @@
 # TextWriter
-Animate your text like never before
+⚡️ Animate your text like never before ⚡️
 
 ## Add dependency
 
