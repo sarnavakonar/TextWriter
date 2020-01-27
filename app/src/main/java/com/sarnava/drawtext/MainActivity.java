@@ -27,16 +27,15 @@ public class MainActivity extends AppCompatActivity {
                 textWriter.setColor(Color.BLACK)
                         .setWidth(12)
                         .setDelay(30)
-                        .setSizeFactor(38f)
+                        .setSizeFactor(40f)
                         .setLetterSpacing(30f)
                         .setConfig(TextWriter.Configuration.INTERMEDIATE)
-                        .setText("SHAKALAKA")
+                        .setText("IRON MAN")
                         .setListener(new TextWriter.Listener() {
                             @Override
                             public void WritingFinished() {
 
-                                //findViewById(R.id.root).setBackgroundColor(Color.GREEN);
-                                Toast.makeText(MainActivity.this, "boom", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(MainActivity.this, "boom", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .startAnimation();

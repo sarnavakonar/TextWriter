@@ -229,6 +229,8 @@ public class TextWriter extends View {
                 totalLetterWidth += 0;
             else if(text.charAt(i) == ' ')
                 totalLetterWidth += HORIZONTAL_BOUND;
+            else if(text.charAt(i) == 'C' || text.charAt(i) == 'G')
+                totalLetterWidth += HORIZONTAL_BOUND + HORIZONTAL_BOUND*Math.cos(-315*Math.PI/180);
             else if(text.charAt(i) == 'J' || text.charAt(i) == 'U' || text.charAt(i) == 'L')
                 totalLetterWidth += 3*HORIZONTAL_BOUND/2;
             else
@@ -241,7 +243,7 @@ public class TextWriter extends View {
         //calculates the total width required to draw the letters including gaps b/w letters
         float totalWidth = totalLetterWidth + GAP*(letters - 1);
 
-        //the starting x-coordinate
+        //the starting and ending x-coordinate
         float startX = (screenWidth - totalWidth)/2;
         float endX = (screenWidth + totalWidth)/2;
 
@@ -1411,7 +1413,7 @@ public class TextWriter extends View {
                 rect.set(centreX - HORIZONTAL_BOUND,
                         centreY - VERTICAL_BOUND,
                         centreX + HORIZONTAL_BOUND,
-                        centreY - VERTICAL_BOUND/128);
+                        centreY - VERTICAL_BOUND/1024);
 
                 path.addArc (rect, 0, sweepAngle);
 
@@ -1429,7 +1431,7 @@ public class TextWriter extends View {
 
                 RectF rect = new RectF();
                 rect.set(centreX - HORIZONTAL_BOUND,
-                        centreY + VERTICAL_BOUND/128,
+                        centreY + VERTICAL_BOUND/1024,
                         centreX + HORIZONTAL_BOUND,
                         centreY + VERTICAL_BOUND);
 
@@ -1583,7 +1585,8 @@ public class TextWriter extends View {
         }
         else if(step == 2){
 
-            path.lineTo(centreX, centreY + VERTICAL_BOUND/4);
+            path.lineTo(centreX - HORIZONTAL_BOUND/16, centreY - VERTICAL_BOUND);
+            path.lineTo(centreX + HORIZONTAL_BOUND/16, centreY - VERTICAL_BOUND);
             step++;
         }
         else if(step == 3){
@@ -1820,13 +1823,15 @@ public class TextWriter extends View {
 
         //shifts the centreX to the end of the canvas after drawing the current letter
         if(currentCharacter == 'I')
-            centreX = centreX + 0;
+            centreX += 0;
+        else if(currentCharacter == 'C' || currentCharacter == 'G')
+            centreX += HORIZONTAL_BOUND*Math.cos(-315*Math.PI/180);
         else if(currentCharacter == ' ')
-            centreX = centreX + HORIZONTAL_BOUND/2;
+            centreX += HORIZONTAL_BOUND / 2;
         else if(currentCharacter == 'J' || currentCharacter == 'U' || currentCharacter == 'L')
-            centreX = centreX + 3*HORIZONTAL_BOUND/4;
+            centreX += 3 * HORIZONTAL_BOUND / 4;
         else
-            centreX = centreX + HORIZONTAL_BOUND;
+            centreX += HORIZONTAL_BOUND;
 
         //checks for next letter if exists
         if(currentPosition + 1 < text.length()) {
@@ -1850,13 +1855,13 @@ public class TextWriter extends View {
 
         //sets the centreX as the centre of the canvas for the next letter
         if(currentCharacter == 'I')
-            centreX = centreX + GAP;
+            centreX += GAP;
         else if(currentCharacter == ' ')
-            centreX = centreX + HORIZONTAL_BOUND/2;
+            centreX += HORIZONTAL_BOUND / 2;
         else if(currentCharacter == 'J' || currentCharacter == 'U' || currentCharacter == 'L')
-            centreX = centreX + GAP + 3*HORIZONTAL_BOUND/4;
+            centreX += GAP + 3 * HORIZONTAL_BOUND / 4;
         else
-            centreX = centreX + GAP + HORIZONTAL_BOUND;
+            centreX += GAP + HORIZONTAL_BOUND;
     }
 
     public interface Listener {
