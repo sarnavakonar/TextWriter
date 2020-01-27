@@ -37,7 +37,7 @@ Customize according to your need:
 textWriter
          .setWidth(12)
          .setDelay(30)
-         .setColor(Color.BLUE)
+         .setColor(Color.RED)
          .setConfig(TextWriter.Configuration.INTERMEDIATE)
          .setSizeFactor(50f)
          .setLetterSpacing(25f)
