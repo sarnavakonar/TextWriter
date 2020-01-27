@@ -40,7 +40,7 @@ textWriter = findViewById(R.id.textWriter);
 
 ## Customization
 
-Customize according to your need (as of now it only support uppercase letters and whitespace):
+Customize according to your need (**as of now it only support uppercase letters and whitespace**):
 
 ```bash
 textWriter
