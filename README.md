@@ -1,7 +1,7 @@
 # TextWriter
 Animate your text like never before
 
-## Add to your project
+## Add dependency
 
 Add this in your root build.gradle at the end of repositories:
 
@@ -41,7 +41,7 @@ textWriter
          .setConfig(TextWriter.Configuration.INTERMEDIATE)
          .setSizeFactor(50f)
          .setLetterSpacing(25f)
-         .setText("CHAK DE INDIA")
+         .setText("LIVERPOOL FC")
          .setListener(new TextWriter.Listener() {
           	@Override
           	public void WritingFinished() {
