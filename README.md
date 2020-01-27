@@ -1,5 +1,5 @@
 # TextWriter
-⚡️ Animate your text like never before ⚡️
+:fire: Animate your text like never before :fire:
 
 ## Add dependency
 
