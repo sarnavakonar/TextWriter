@@ -43,7 +43,7 @@ textWriter = findViewById(R.id.textWriter);
 
 ## Customization
 
-Customize according to your need (**as of now it only support uppercase letters and whitespace** :broken_heart:):
+Customize according to your need (**as of now it supports only uppercase letters and whitespace** :broken_heart:):
 
 ```
 textWriter
@@ -51,7 +51,7 @@ textWriter
          .setDelay(30)
          .setColor(Color.RED)
          .setConfig(TextWriter.Configuration.INTERMEDIATE)
-         .setSizeFactor(30f)
+         .setSizeFactor(30f) 
          .setLetterSpacing(25f)
          .setText("LIVERPOOL FC")
          .setListener(new TextWriter.Listener() {
@@ -63,6 +63,7 @@ textWriter
           })
          .startAnimation();
 ```
+***Because of different screen resolutions of different devices, try to avoid using constant values for width, sizeFactor and letterSpacing. Instead use some fraction of the screenWidth for consistent result across multiple devices.***
 
 ## Contributing :heart_eyes:
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
