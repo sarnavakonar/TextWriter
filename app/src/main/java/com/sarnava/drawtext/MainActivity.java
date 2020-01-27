@@ -26,12 +26,13 @@ public class MainActivity extends AppCompatActivity {
                 .setSizeFactor(50f)
                 .setLetterSpacing(30f)
                 .setConfig(TextWriter.Configuration.INTERMEDIATE)
-                .setText("PINK")
+                .setText("DUN KIRK")
                 .setListener(new TextWriter.Listener() {
                     @Override
                     public void WritingFinished() {
 
                         textWriter.setColor(Color.RED);
+                        textWriter.setWidth(18);
                         //Toast.makeText(MainActivity.this, "boom", Toast.LENGTH_SHORT).show();
                     }
                 })

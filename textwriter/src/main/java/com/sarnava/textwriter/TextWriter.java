@@ -229,10 +229,14 @@ public class TextWriter extends View {
         float totalLetterWidth = 0;
         for(int i=0; i< text.length(); i++){
 
-            if(!Character.isUpperCase(text.charAt(i)) && !Character.isSpaceChar(text.charAt(i))){
-
+            if(!Character.isUpperCase(text.charAt(i)) && !Character.isSpaceChar(text.charAt(i)))
                 throw new RuntimeException("Text does not follow rules");
-            }
+
+            if(i == 0 && Character.isSpaceChar(text.charAt(i)))
+                throw new RuntimeException("First character cannot be a whitespace");
+
+            if(i == text.length()-1 && Character.isSpaceChar(text.charAt(i)))
+                throw new RuntimeException("Last character cannot be a whitespace");
 
             //adds the width required to draw the particular letter
             if(text.charAt(i) == 'I')
