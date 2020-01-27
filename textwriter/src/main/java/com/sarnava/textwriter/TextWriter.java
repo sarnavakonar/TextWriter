@@ -48,10 +48,10 @@ public class TextWriter extends View {
     private float VERTICAL_BOUND=100f, HORIZONTAL_BOUND, GAP = 50f;
     private float x, y, sweepAngle;
     private float centreX, centreY;
-    private boolean hasDrawingStarted;
+    private boolean hasDrawingStarted, startAnimationCalled;
     private String text;
     private char currentCharacter;
-    Configuration config = Configuration.RECTANGLE;
+    private Configuration config = Configuration.RECTANGLE;
     private Listener listener;
 
     public TextWriter(Context context) {
@@ -189,8 +189,8 @@ public class TextWriter extends View {
 
         if(!hasDrawingStarted) {
 
-            if(screenWidth <= 0 || screenHeight <= 0)
-                invalidate();
+            if(startAnimationCalled)
+                startAnimation();
 
             return;
         }
@@ -203,6 +203,16 @@ public class TextWriter extends View {
     }
 
     public void startAnimation() throws RuntimeException {
+
+        startAnimationCalled = true;
+
+        //incase onDraw didn't finish calculating screenWidth and screenHeight call invalidate to
+        //ensure that we get their value
+        if(screenWidth <= 0 || screenHeight <= 0) {
+            Log.e("boom", "called invalidate() to calculate screenWidth and screenHeight");
+            invalidate();
+            return;
+        }
 
         if(TextUtils.isEmpty(text)){
             throw new RuntimeException("Text is null or empty");
@@ -240,7 +250,7 @@ public class TextWriter extends View {
         //get only the letters excluding whitespaces
         int letters = text.replaceAll(" ", "").length();
 
-        //calculates the total width required to draw the letters including gaps b/w letters
+        //calculates the total width required to draw the letters including gap b/w letters
         float totalWidth = totalLetterWidth + GAP*(letters - 1);
 
         //the starting and ending x-coordinate
@@ -1821,11 +1831,11 @@ public class TextWriter extends View {
 
     private void adjust(){
 
-        //shifts the centreX to the end of the canvas after drawing the current letter
+        //shifts the centreX to the end of the canvas(for that letter) after drawing it
         if(currentCharacter == 'I')
             centreX += 0;
         else if(currentCharacter == 'C' || currentCharacter == 'G')
-            centreX += HORIZONTAL_BOUND*Math.cos(-315*Math.PI/180);
+            centreX += HORIZONTAL_BOUND * Math.cos(-315*Math.PI/180);
         else if(currentCharacter == ' ')
             centreX += HORIZONTAL_BOUND / 2;
         else if(currentCharacter == 'J' || currentCharacter == 'U' || currentCharacter == 'L')
