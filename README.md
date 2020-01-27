@@ -21,7 +21,16 @@ implementation 'com.github.sarnavakonar:TextWriter:v1.0'
 
 ## Initialization
 
-Initialize the TextWriter:
+Add TextWriter in your xml file:
+
+```bash
+<com.sarnava.textwriter.TextWriter
+        android:id="@+id/tw"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+```
+
+Initialize the TextWriter in Activity file:
 
 ```bash
 TextWriter textWriter;
