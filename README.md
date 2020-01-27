@@ -25,7 +25,7 @@ Add TextWriter in your xml file:
 
 ```bash
 <com.sarnava.textwriter.TextWriter
-        android:id="@+id/tw"
+        android:id="@+id/textWriter"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 ```
