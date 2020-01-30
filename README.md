@@ -2,7 +2,9 @@
 
 :fire: Animate your text like never before :fire:
 
-![gif](https://i.imgur.com/5HYyWBh.gif)
+Solarized dark             |  Solarized Ocean
+:-------------------------:|:-------------------------:
+![gif](https://i.imgur.com/5HYyWBh.gif)  |  ![gif](https://i.imgur.com/T71CB1e.gif)
 
 ## Add dependency
 
