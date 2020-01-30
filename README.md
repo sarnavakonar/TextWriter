@@ -2,7 +2,7 @@
 
 :fire: Animate your text like never before :fire:
 
-Solarized dark             |  Solarized Ocean
+Basic animation             |  Animation use e.g. - 1
 :-------------------------:|:-------------------------:
 ![gif](https://i.imgur.com/5HYyWBh.gif)  |  ![gif](https://i.imgur.com/T71CB1e.gif)
 
