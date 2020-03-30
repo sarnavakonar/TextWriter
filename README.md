@@ -1,4 +1,4 @@
-# TextWriter  ![gif](https://img.shields.io/apm/l/link)  [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Animate%20your%20text%20like%20never%20before&url=https://github.com/sarnavakonar/TextWriter&hashtags=android,design,ui,ux,animation,developers)
+# TextWriter  ![gif](https://img.shields.io/apm/l/link)  [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Animate%20your%20text%20like%20never%20before&url=https://github.com/sarnavakonar/TextWriter&hashtags=android,design,ui,ux,animation,developers)   ![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-TextWriter-green.svg?style=flat )
 
 :fire: Animate your text like never before :fire:
 
