@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //use kotlin & migrate to androidX
         textWriter = findViewById(R.id.tw);
 
         textWriter.setColor(Color.BLACK)
